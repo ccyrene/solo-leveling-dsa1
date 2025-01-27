@@ -1,42 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-pair<bool,int> binarySearch(vector<int> A, int key) {
-    int s = 0;
-    int e = A.size()-1;
-    int finalIndex = -1;
-    while(s<=e) {
-        int mid = (s+e)/2;
-        if (A[mid] == key) return {true, mid};
-        
-        if (A[mid] > key) {
-            e = mid - 1;
-        }else{
-            s = mid + 1;
-        }
-
-        finalIndex = mid;
-    }
-    
-    return {false, finalIndex};
-}
-
-
 int lowerBound(vector<int> A, int Val) {
 
-    // check smallest element of Array A.
-    if (Val < A[0]) return -1;
-    
-    pair<bool, int> result = binarySearch(A, Val);
-    
-    // cout << "(" << result.first << "," << result.second << ")" << "\n";
-    
-    if (result.first) {
-        return Val;
-    } else {
-        return A[result.second - 1];
+    int s=0, e=A.size()-1, answer=-1;
+
+    while (s <= e) {
+        int mid = (s + e) / 2;
+        if (A[mid] > Val) {
+            e = mid-1;
+        } else {
+            answer = A[mid];
+            s = mid+1;
+        }
     }
-    
+
+    return answer;
 }
 
 int main() {
